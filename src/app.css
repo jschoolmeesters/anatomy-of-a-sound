@@ -1,1 +1,65 @@
 @import 'tailwindcss';
+
+html {
+    font-family: 'wb', Helvetica, sans-serif;
+}
+
+
+    .foil {
+        --gx: 50%;
+        --gy: 50%;
+    }
+
+    .foil {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background:
+        /* Two drifting radial gradients */
+        radial-gradient(circle at var(--gx) var(--gy), rgba(255, 0, 150, 0.3), transparent 60%),
+        radial-gradient(circle at var(--gy) var(--gx), rgba(0, 255, 255, 0.3), transparent 60%);
+      mix-blend-mode: screen;
+      filter: blur(2px);
+      animation: hueShift 5s infinite linear;
+    }
+
+    /* Continuous color cycling */
+    @keyframes hueShift {
+      from { filter: hue-rotate(0deg) blur(2px); }
+      to   { filter: hue-rotate(360deg) blur(2px); }
+    }
+
+    /* now for foil1 */
+
+    .foil1 {
+        --gx: 50%;
+        --gy: 50%;
+    }
+
+    .foil1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background:
+        /* Two drifting radial gradients */
+        radial-gradient(circle at var(--gx) var(--gy), rgba(255, 0, 150, 0.3), transparent 60%),
+        radial-gradient(circle at var(--gy) var(--gx), rgba(0, 255, 255, 0.3), transparent 60%);
+      mix-blend-mode: screen;
+      filter: blur(2px);
+      animation: hueShift 5s infinite linear;
+    }
+
+
+/* add KMR-Waldenburg-Buch.woff2 */
+@font-face {
+    font-family: 'wb';
+    src: url('/fonts/KMR-Waldenburg-Buch.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
