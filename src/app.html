@@ -30,11 +30,24 @@
 				foil1.style.setProperty('--gy', y);
 			});
 		});
+
+		// now for foil2
+		document.addEventListener('DOMContentLoaded', () => {
+			const foil2 = document.querySelector('.foil2');
+			if (!foil2) return;
+
+			window.addEventListener('mousemove', (e) => {
+				const x = (e.clientX / window.innerWidth) * 100 + '%';
+				const y = (e.clientY / window.innerHeight) * 100 + '%';
+				foil2.style.setProperty('--gx', x);
+				foil2.style.setProperty('--gy', y);
+			});
+		});
 		</script>
 
 	</head>
 	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
+		<div class="sveltekit-body" style="display: contents;">%sveltekit.body%</div>
 	</body>
 
 </html>

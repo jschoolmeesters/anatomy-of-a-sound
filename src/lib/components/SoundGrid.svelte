@@ -57,10 +57,29 @@
 
   const mSounds = Object.values(mutatedSounds);
   const oSounds = Object.values(organicSounds);
+
+  let cursorText = 'Click To Play Song';
+  let cursorX = 0;
+  let cursorY = 0;
+
+  function handleMouseMove(e: MouseEvent) {
+    cursorX = e.clientX + 12; // offset to the right
+    cursorY = e.clientY + 12; // offset down
+  }
 </script>
 
-<div id="shell-layer" class="h-[100vh] w-[100vw] grid grid-rows-10 overflow-hidden">
-    <img src="src/photo/shell_content.png" class="{state !== 'shell' ? 'opacity-0' : 'opacity-100'} transition-opacity duration-400 absolute size-full object-cover pointer-events-none"/>
+<div on:mousemove={handleMouseMove} id="shell-layer" class="h-[100vh] w-[100vw] grid grid-rows-10 overflow-hidden">
+    {#if state === 'shell'}
+  <div
+    class="z-100 absolute pointer-events-none text-sm bg-black text-white px-2 py-1 rounded"
+    style="top: {cursorY}px; left: {cursorX}px;"
+  >
+    {cursorText}
+  </div>
+    {/if}
+
+
+    <img src="src/photo/shell_content.png" class="{state !== 'shell' ? 'opacity-0' : 'opacity-100'} cursor-pointer transition-opacity duration-400 absolute size-full object-cover pointer-events-none"/>
 
     <div class="foil1 {state !== 'shell' ? 'opacity-50' : 'opacity-100'}"></div>
 
@@ -88,7 +107,7 @@
                         {#if [0,2,8,10].includes(i)}
                             <SoundCell 
                                 clss="col-span-2 row-span-2 opacity-70 hover:opacity-100 transition-opacity duration-300" 
-                                label={`Sound ${i + 1}`} 
+                                label={(sound as string).substring((sound as string).lastIndexOf('/') + 1)} 
                                 src={sound as string}
                                 vidSrc={`/src/video/${(sound as string).split('/').pop()?.replace('.mp3', '.mp4')}`}
                                 on:playSound={() => handlePlay(sound as string)}
@@ -98,7 +117,7 @@
                         {:else if [1,3,9,11].includes(i)}
                             <SoundCell 
                                 clss={`col-span-4 row-span-2 hover:filter-none opacity-70 hover:opacity-100 transition-opacity duration-300`} 
-                                label={`Sound ${i + 1}`} 
+                                label={(sound as string).substring((sound as string).lastIndexOf('/') + 1)} 
                                 src={sound as string}
                                 vidSrc={`/src/video/${(sound as string).split('/').pop()?.replace('.mp3', '.mp4')}`}
                                 on:playSound={() => handlePlay(sound as string)}
@@ -108,7 +127,7 @@
                         {:else if [4,6].includes(i)}
                             <SoundCell 
                                 clss={`col-span-3 row-span-3 hover:filter-none opacity-70 hover:opacity-100 transition-opacity duration-300`} 
-                                label={`Sound ${i + 1}`} 
+                                label={(sound as string).substring((sound as string).lastIndexOf('/') + 1)} 
                                 src={sound as string}
                                 vidSrc={`/src/video/${(sound as string).split('/').pop()?.replace('.mp3', '.mp4')}`}
                                 on:playSound={() => handlePlay(sound as string)}
@@ -118,7 +137,7 @@
                         {:else if [5,7].includes(i)}
                             <SoundCell 
                                 clss={`col-span-3 row-span-1 hover:filter-none opacity-70 hover:opacity-100 transition-opacity duration-300`} 
-                                label={`Sound ${i + 1}`} 
+                                label={(sound as string).substring((sound as string).lastIndexOf('/') + 1)} 
                                 src={sound as string}
                                 vidSrc={`/src/video/${(sound as string).split('/').pop()?.replace('.mp3', '.mp4')}`}
                                 on:playSound={() => handlePlay(sound as string)}
@@ -128,7 +147,7 @@
                         {:else if i!= 0}
                             <SoundCell 
                                 clss={`col-span-3 row-span-2 hover:filter-none opacity-70 hover:opacity-100 transition-opacity duration-300`} 
-                                label={`Sound ${i + 1}`} 
+                                label={(sound as string).substring((sound as string).lastIndexOf('/') + 1)} 
                                 src={sound as string}
                                 vidSrc={`/src/video/${(sound as string).split('/').pop()?.replace('.mp3', '.mp4')}`}
                                 on:playSound={() => handlePlay(sound as string)}
@@ -139,7 +158,7 @@
                         {/if}
 
                     {/each}
-                    <div bind:this={fillOrganic} class="col-start-4 row-start-4 col-span-6 row-span-4 relative">
+                    <div bind:this={fillOrganic} class="p-2 text-justify flex items-center col-start-4 row-start-4 col-span-6 row-span-4 relative">
                         {#if selectedVid}
                             <video
                             class="absolute inset-0 w-full h-full object-cover z-100 opacity-20 blur-sm"
@@ -161,13 +180,13 @@
                         clss={`col-span-3
                         ${[2, 3, 6, 7, 18, 19,14,15,20,21,22,23].includes(i) ? 'row-span-1' : ([0,1,4,5,8,9,10,11,12,13,16,17].includes(i) ? 'row-span-2' : 'row-span-2')}
                         hover:filter-none opacity-50 invert transition-opacity duration-300`} 
-                        label={`Sound ${i + 1}`} 
+                        label={(sound as string).substring((sound as string).lastIndexOf('/') + 1)} 
                         src={sound as string}
                         imgSrc={`/src/photo/${(sound as string).split('/').pop()?.replace('.mp3', '').split('-')[1]}.png`}
                         on:playSound={() => handlePlay(sound as string)}
                     />
                     {/each}
-                    <div bind:this={fillMutated} class="col-start-4 row-start-4 col-span-6 row-span-4">
+                    <div bind:this={fillMutated} class="p-2 text-justify flex items-center col-start-4 row-start-4 col-span-6 row-span-4">
                         These processed sounds are exclusively used for the final layer—the shell (song). Not every sample made it into the track, but even unused sounds influence the selection, character and texture of those that do, and thus also the end result. This is why I chose to include them: they are part of the process.
                     </div>
                 </div>

@@ -17,7 +17,7 @@
   }
 </script>
 
-<div on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} class="{clss} relative overflow-hidden" on:click={() => dispatch('playSound')}>
+<div on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} class="{clss} cursor-pointer relative overflow-hidden" on:click={() => dispatch('playSound')}>
   {#if vidSrc}
     <video
       class="absolute inset-0 w-full h-full object-cover z-0"

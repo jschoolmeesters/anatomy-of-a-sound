@@ -14,6 +14,20 @@ let durationDefaultCrazyFast = 0.3;
 CustomEase.create("primary-ease", "0.62, 0.05, 0.01, 0.99");
 CustomEase.create("primary-ease-out", ".34, 1.56, 0.64, 1");
 
+/* fade out .cover */
+export async function fadeOutCover(
+  el: HTMLElement,
+  duration: number = 0.4,
+  ease: string = 'primary-ease-out'
+) {
+  await gsap.to(el, {
+    opacity: 0,
+    duration,
+    ease
+  });
+}
+
+
 export async function switchLayer(
   fromEl: HTMLElement,
   toEl: HTMLElement,

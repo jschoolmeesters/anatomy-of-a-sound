@@ -4,6 +4,10 @@ html {
     font-family: 'wb', Helvetica, sans-serif;
 }
 
+html, .sveltekit-body, body {
+  overflow:hidden;
+}
+
 
     .foil {
         --gx: 50%;
@@ -40,6 +44,7 @@ html {
     }
 
     .foil1 {
+      cursor: pointer;
       position: absolute;
       top: 0;
       left: 0;
@@ -50,6 +55,29 @@ html {
         /* Two drifting radial gradients */
         radial-gradient(circle at var(--gx) var(--gy), rgba(255, 0, 150, 0.3), transparent 60%),
         radial-gradient(circle at var(--gy) var(--gx), rgba(0, 255, 255, 0.3), transparent 60%);
+      mix-blend-mode: screen;
+      filter: blur(2px);
+      animation: hueShift 5s infinite linear;
+    }
+
+    /* foil2 */
+
+    .foil2 {
+        --gx: 50%;
+        --gy: 50%;
+    }
+
+    .foil2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background:
+        /* Two drifting radial gradients */
+        radial-gradient(circle at var(--gx) var(--gy), rgba(255, 0, 150, 0.5), transparent 60%),
+        radial-gradient(circle at var(--gy) var(--gx), rgba(0, 255, 255, 0.5), transparent 60%);
       mix-blend-mode: screen;
       filter: blur(2px);
       animation: hueShift 5s infinite linear;
